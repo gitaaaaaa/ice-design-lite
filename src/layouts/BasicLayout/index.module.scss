@@ -1,0 +1,22 @@
+.iceDesignLayoutDark {
+  &.iceDesignLayout {
+    min-height: 100vh; // 1vh = 视口高度的1%
+  }
+
+  :global {
+    .ice-layout {
+      width: 100%;
+      min-height: 100vh;
+      background: transparent;
+    }
+  
+    .ice-layout-main {
+      padding: 0 0 0 20px;
+    }
+  
+    .ice-layout-section {
+      //margin: 20px 0 0;
+    }
+  }
+}
+  

@@ -1,0 +1,12 @@
+// 引入默认全局样式
+@import '@alifd/next/reset.scss';
+
+body {
+  -webkit-font-smoothing: antialiased;
+  // min-width: 1280px;
+  // overflow: hidden;
+}
+
+.hide {
+  display: none;
+}
