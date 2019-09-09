@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { Icon, Nav } from '@alifd/next';
-import { asideMenuConfig } from '@/config/menu.js';
-import Logo from '../Logo';
-import styles from './index.module.scss';
+import React, { useState, useEffect } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { Icon, Nav } from "@alifd/next";
+import { asideMenuConfig } from "@/config/menu.js";
+import Logo from "../Logo";
+import styles from "./index.module.scss";
+import ThemeContext from "@/theme-context";
 
 const SubNav = Nav.SubNav;
 const NavItem = Nav.Item;
@@ -21,9 +22,7 @@ function getSubMenuOrItem(item, index) {
           key={index}
           icon={item.icon ? item.icon : null}
           label={
-            <span className={styles.iceMenuCollapseHide}>
-              {item.name}
-            </span>
+            <span className={styles.iceMenuCollapseHide}>{item.name}</span>
           }
         >
           {childrenItems}
@@ -34,9 +33,7 @@ function getSubMenuOrItem(item, index) {
   }
   return (
     <NavItem key={item.path}>
-      <Link to={item.path}>
-        {item.name}
-      </Link>
+      <Link to={item.path}>{item.name}</Link>
     </NavItem>
   );
 }
@@ -74,7 +71,7 @@ function getDefaultOpenKeys(location = {}) {
   return openKeys;
 }
 
-const Aside = withRouter((props) => {
+const Aside = withRouter(props => {
   const defaultOpenKeys = getDefaultOpenKeys(props.location);
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openKeys, setOpenKeys] = useState(defaultOpenKeys);
@@ -112,43 +109,42 @@ const Aside = withRouter((props) => {
     setOpenKeys(keys);
   }
 
-
   const {
     location: { pathname },
     collapse
   } = props;
 
-  const openDrawerClassName = openDrawer ? styles.openDrawer : '';
+  const openDrawerClassName = openDrawer ? styles.openDrawer : "";
 
   return (
-    <div className={`${styles.iceDesignLayoutAside} ${styles.iceDesignLiteAside} ${openDrawerClassName}`}>
-      {/* {isMobile && <Logo />} */}
-
-      {/* {isMobile && !openDrawer && (
-        <a className={styles.menuBtn} onClick={toggleMenu}>
-          <Icon type="calendar" size="small" />
-        </a>
-      )} */}
-
-      <Nav
-        style={{ width: collapse ? 60 : 240 }}
-        direction="ver"
-        activeDirection={null}
-        mode={collapse ? 'popup':'inline'}
-        triggerType={collapse ? 'hover':'click'}
-        selectedKeys={[pathname]}
-        openKeys={openKeys}
-        defaultSelectedKeys={[pathname]}
-        onOpen={onOpenChange}
-        onClick={onMenuClick}
-        iconOnly={collapse}
-        hasArrow={false}
-        hasTooltip={true}
-        openMode="single"
-      >
-        {getNavMenuItems(asideMenuConfig)}
-      </Nav>
-    </div>
+    <ThemeContext.Consumer>
+      {theme => {
+        return (
+          <div
+            className={`${styles.iceDesignLayoutAside} ${styles.iceDesignLiteAside} ${openDrawerClassName}`}
+          >
+            <Nav
+              style={{ width: collapse ? 60 : 240 }}
+              direction="ver"
+              activeDirection={null}
+              mode={collapse ? "popup" : "inline"}
+              triggerType={collapse ? "hover" : "click"}
+              selectedKeys={[pathname]}
+              openKeys={openKeys}
+              defaultSelectedKeys={[pathname]}
+              onOpen={onOpenChange}
+              onClick={onMenuClick}
+              iconOnly={collapse}
+              hasArrow={false}
+              hasTooltip={true}
+              openMode="single"
+            >
+              {getNavMenuItems(asideMenuConfig)}
+            </Nav>
+          </div>
+        );
+      }}
+    </ThemeContext.Consumer>
   );
 });
 

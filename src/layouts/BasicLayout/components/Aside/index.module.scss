@@ -48,31 +48,31 @@
   }
 }
 
-@media screen and (max-width: 1199px) {
-  .iceDesignLiteAside {
-    &.iceDesignLayoutAside {
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: -256px;
-      z-index: 9999;
-      padding: 0 20px;
-      background: #2e323e !important;
-    }
+// @media screen and (max-width: 1199px) {
+//   .iceDesignLiteAside {
+//     &.iceDesignLayoutAside {
+//       position: fixed;
+//       top: 0;
+//       bottom: 0;
+//       left: -256px;
+//       z-index: 9999;
+//       padding: 0 20px;
+//       background: #2e323e !important;
+//     }
 
-    .openDrawer {
-      transform: translateX(256px);
+//     .openDrawer {
+//       transform: translateX(256px);
 
-      :global {
-        .logo {
-          width: 200px;
-          margin: 20px 0;
-          text-align: center;
-        }
-      }
-    }
-  }
-}
+//       :global {
+//         .logo {
+//           width: 200px;
+//           margin: 20px 0;
+//           text-align: center;
+//         }
+//       }
+//     }
+//   }
+// }
 .nav-box {
   width: 200px;
 }

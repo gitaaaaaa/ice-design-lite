@@ -4,6 +4,7 @@ import IceImg from '@icedesign/img';
 import { Link } from 'react-router-dom';
 import { headerMenuConfig } from '@/config/menu.js';
 import Logo from '../Logo';
+import ThemeContext from "@/theme-context";
 
 import styles from './index.module.scss';
 
@@ -13,9 +14,18 @@ export default function Header(props) {
   return (
     <div className={`${styles.iceDesignLayoutHeader} ${className}`} style={{ ...style }}>
       <div className={styles.iceDesignLayoutHeaderLogo}>
-        <Button type="primary" className={styles.iceDesignLayoutAsideBtn} onClick={()=>setCollapse(!collapse)}>
+         <ThemeContext.Consumer>
+              {
+                theme=>{
+                  return (
+<Button type="normal" className={styles.iceDesignLayoutAsideBtn} onClick={()=>setCollapse(!collapse)} style={{backgroundColor: theme.bgColor}}>
           <Icon type={collapse ? 'arrow-right':'arrow-left'} />
         </Button>
+                  )
+                }
+              }
+            </ThemeContext.Consumer>
+        
         <Logo />
       </div>
       <div className={styles.iceDesignLayoutHeaderMenu}>
